@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "./form.module.css";
 import Card from "../UI/Card";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
+import MailBoxContext from "../Store/MailboxContext";
 
 const Form = () => {
+   const mailCtx = useContext(MailBoxContext)
+  
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(true);
@@ -52,7 +56,10 @@ const Form = () => {
           returnSecureToken: true,
         })
         .then((res) => {
-           console.log(res.data)
+           console.log(res.data.idToken);
+          mailCtx.login(res.data.idToken);
+          console.log('user signed in');
+          // history.replace('/home');
            
         })
         .catch((err) => {
@@ -82,18 +89,18 @@ const Form = () => {
           <input
             className={classes.control}
             type="email"
-            id="email"
+            id="Email"
             onChange={emailHandler}
             
           />
           {!emailIsValid && <p className={classes.text}>Email is required.</p>}
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="Password">Password</label>
           <input
             className={classes.control}
             type="password"
-            id="password"
+            id="Password"
             onChange={passwordHandler}
             
           />

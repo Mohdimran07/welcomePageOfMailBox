@@ -80,10 +80,14 @@
   .toggle button {
      cursor: pointer;
     font: inherit;
-    color: white;
-    background-color: #9f5ccc;
+    color: black;
+    font-size: 22px;
+    background-color: white;
     border: 1px solid #9f5ccc;
     border-radius: 4px;
+    height: 45px;
+    width: 100%;
+    position: relative;
     padding: 0.5rem 2.5rem;
   }
   .toggle button:hover {
